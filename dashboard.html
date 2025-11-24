@@ -1,36 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="dashboard-body">
 
-    <naV class="navbar">
-        <h2 id="loggedUser" class="loggedUser"></h2>
-        <button id="logoutButton" class="logoutButton">Logout</button>
-    </naV>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <div class="avatar" id="userAvatar"></div>
+      <div class="navbar-user-info">
+        <span class="navbar-hello">Welcome back,</span>
+        <h2 id="loggedUser" class="navbar-username"></h2>
+      </div>
+    </div>
+    <div class="navbar-right">
+      <button id="logoutButton" class="logoutButton">Logout</button>
+    </div>
+  </nav>
+
+  <main class="dashboard-main">
+
+    <section class="user-panel">
+      <div class="user-card glass-card">
+        <h3>User Details</h3>
+        <div class="user-details-grid">
+          <div class="detail-row">
+            <span class="label">Full Name</span>
+            <span class="value" id="detailFullName">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Username</span>
+            <span class="value" id="detailUsername">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Email</span>
+            <span class="value" id="detailEmail">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Branch</span>
+            <span class="value" id="detailBranch">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Year</span>
+            <span class="value" id="detailYear">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Roll No.</span>
+            <span class="value" id="detailRoll">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Joined On</span>
+            <span class="value" id="detailJoinedOn">-</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card glass-card">
+          <span class="stat-label">Currently Borrowed</span>
+          <span class="stat-value" id="statCurrentBorrowed">0</span>
+        </div>
+        <div class="stat-card glass-card">
+          <span class="stat-label">Total Borrowed</span>
+          <span class="stat-value" id="statTotalBorrowed">0</span>
+        </div>
+        <div class="stat-card glass-card">
+          <span class="stat-label">Max Borrow Limit</span>
+          <span class="stat-value" id="statMaxBorrow">0</span>
+        </div>
+        <div class="stat-card glass-card">
+          <span class="stat-label">Fines (₹)</span>
+          <span class="stat-value fine" id="statFines">0</span>
+        </div>
+      </div>
+    </section>
 
 
-    
-    <script src="data.js"></script>
-    <script src="main.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded",()=>{
-            const currentUser = getCurrentUser();
-            if(!currentUser){
-                window.location.href = "index.html";
-                return;
-            }
-            console.log(currentUser)
-            document.getElementById("loggedUser").textContent=(currentUser).username;
-        })
-        document.getElementById("logoutButton").addEventListener("click",removeCurrentUser)
-        
-    </script>
+    <section class="books-panel">
+      <div class="books-header">
+        <div>
+          <h3>Available Books</h3>
+          <p class="subtitle">Browse books and borrow directly from your dashboard.</p>
+        </div>
+        <input
+          type="text"
+          id="bookSearch"
+          class="book-search"
+          placeholder="Search by title, author, or category..."
+        />
+      </div>
 
+      <div class="books-table-container glass-card">
+        <table class="books-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Category</th>
+              <th>Year</th>
+              <th>Available</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="booksTableBody">
+
+          </tbody>
+        </table>
+        <p class="empty-text" id="noBooksMessage" style="display:none;">
+          No books match your search or all are currently unavailable.
+        </p>
+      </div>
+
+      <div class="borrowed-section glass-card">
+        <div class="borrowed-header">
+          <h3>Your Borrowed Books</h3>
+          <p class="subtitle">Books you have currently borrowed.</p>
+        </div>
+        <ul class="borrowed-list" id="borrowedList">
+
+        </ul>
+        <p class="empty-text" id="noBorrowedMessage">
+          You haven't borrowed any books yet. Start by choosing one above!
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initDashboard(); 
+    });
+
+    document.getElementById("logoutButton").addEventListener("click", removeCurrentUser);
+  </script>
 </body>
-
-    
 </html>
