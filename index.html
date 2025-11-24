@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="main-container">
+        <div class="Login-container">
+        
+            <h1>LOGIN</h1>
+            <form id="loginForm">
+
+                <div class="Fields">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="USERNAME">
+                </div>
+                <div class="Fields">
+                <label for="password">Password</label>
+                <input type="text" id="password" placeholder="PASSWORD">
+                
+                </div>
+                <button id="submitButton" class="submit-button" type="submit">LOGIN</button>
+            </form>
+        </div>
+        <div id="error" class="error">
+
+
+    </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script src="data.js"></script>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit",handleLogin);
+        document.addEventListener("DOMContentLoaded", () => {
+        const currentUser = getCurrentUser();
+        if (currentUser) {
+        window.location.href = "dashboard.html";
+        }
+        });
+    </script>
+
+</body>
+</html>
